@@ -1,0 +1,33 @@
+const Header = () => {
+    return (
+        <>
+            <header className="w-screen px-24 py-4 absolute flex justify-between bg-cyan-500 items-center">
+                <div className="w-fit flex">
+                    <h1 className="text-2xl mr-2">&#128028;</h1>
+                </div>
+                <nav className="w-fit flex items-center">
+                    <a href="#" className="ml-2 text-md text-white">
+                        <button className="flex items-center p-1 px-2 bg-black rounded-lg">
+                            <i className="fa-brands fa-github text-white text-2xl mr-2"></i>
+                            <div className="text-left">
+                                <p className="tex-white text-[8px]" style={{ marginBottom: "-5px" }}>Contribute on</p>
+                                <h3 className="text-md text-white">Github</h3>
+                            </div>
+                        </button>
+                    </a>
+                    <a href="#" className="ml-2 text-md text-white">
+                        <button className="flex items-center p-1 px-2 bg-red-500 rounded-lg">
+                            <i className="fa-brands fa-product-hunt text-white text-2xl mr-2"></i>
+                            <div className="text-left">
+                                <p className="tex-white text-[8px]" style={{ marginBottom: "-5px" }}>Featured on</p>
+                                <h3 className="text-md text-white">ProductHunt</h3>
+                            </div>
+                        </button>
+                    </a>
+                </nav>
+            </header>
+        </>
+    )
+}
+
+export default Header

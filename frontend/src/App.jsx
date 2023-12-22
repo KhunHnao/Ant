@@ -8,7 +8,7 @@ function App() {
   const [processing, setProcessing] = useState(false);
   const [qrCodePath, setQrCodePath] = useState('');
 
-  const generateQRCode = async () => {
+  const performMagic = async () => {
     try {
       setProcessing(true);
 
@@ -20,16 +20,6 @@ function App() {
       // Extract QR code path from the response
       const { qr_code_path } = qrResponse.data;
       setQrCodePath(qr_code_path);
-    } catch (error) {
-      console.error('Failed to generate QR code:', error);
-    } finally {
-      setProcessing(false);
-    }
-  };
-
-  const generateShortUrl = async () => {
-    try {
-      setProcessing(true);
 
       // Make a request to generate short URL
       const shortUrlResponse = await axios.post('/api/v1/generate_link', {
@@ -39,7 +29,7 @@ function App() {
       // Handle the response as needed
       console.log(shortUrlResponse.data);
     } catch (error) {
-      console.error('Failed to generate short URL:', error);
+      console.error('Failed to perform magic:', error);
     } finally {
       setProcessing(false);
     }
@@ -70,17 +60,10 @@ function App() {
             />
             <button
               id="submit"
-              onClick={generateQRCode} // Trigger QR code generation
+              onClick={performMagic} // Trigger both actions
               className="p-2 bg-yellow-500 rounded-lg"
             >
               <i className="text-white mx-2 fa-solid fa-wand-magic-sparkles"></i>
-            </button>
-            <button
-              id="submit"
-              onClick={generateShortUrl} // Trigger short URL generation
-              className="p-2 bg-yellow-500 rounded-lg ml-2"
-            >
-              <i className="text-white mx-2 fa-solid fa-link"></i>
             </button>
           </div>
         </div>

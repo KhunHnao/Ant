@@ -8,7 +8,7 @@ import os
 # Config 
 dbinit()
 app = Flask(__name__)
-db = SQL("sqlite:///database.db")
+db = SQL("postgres://mfwmlcdp:sYg0kej_KDz1wiPDSP0Fhlft-JslSOhg@mel.db.elephantsql.com/mfwmlcdp")
 
 CORS(app)  # Enable CORS for all routes
 
@@ -20,7 +20,7 @@ if not os.path.exists(QR_CODE_DIR):
 def index():
     return jsonify("OK")
 
-## API
+## API  
 
 @app.route("/api/v1/generate_link", methods=["POST"])
 def generate_link():

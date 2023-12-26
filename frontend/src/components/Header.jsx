@@ -1,7 +1,7 @@
 const Header = () => {
     return (
         <>
-            <header className="w-screen px-24 py-4 absolute flex justify-between bg-cyan-500 items-center">
+            <header className="w-screen px-4 md:px-24 py-4 absolute flex justify-between bg-cyan-500 items-center">
                 <div className="w-fit flex">
                     <h1 className="text-2xl mr-2">&#128028;</h1>
                 </div>

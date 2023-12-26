@@ -52,10 +52,10 @@ function App() {
   return (
     <>
       <Header />
-      <section className="w-full h-screen bg-cyan-500 flex justify-between items-start">
-        <div className="w-2/4 p-24 pr-8 h-full flex flex-col justify-between">
+      <section className="w-full min-h-screen md:h-screen bg-cyan-500 md:flex md:justify-between md:items-start">
+        <div className="w-screen md:w-2/4 p-4 md:p-24 pt-24 md:pr-8 h-full flex flex-col md:justify-between">
           <div>
-            <h1 className="text-6xl font-bold text-white mb-2">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
               URL Shortener + QR Code Generator
             </h1>
             <p className="text-white text-lg">
@@ -69,7 +69,7 @@ function App() {
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="w-[300px] p-2 bg-white rounded-lg mr-2"
+              className="w-[300px] p-2 bg-white rounded-lg mr-2 mb-2"
               placeholder="https://extreme.ly/long/url/00292928345"
             />
             <button
@@ -81,7 +81,7 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="w-2/4 p-24 pl-16 h-full flex flex-col justify-center items-center">
+        <div className="w-full md:w-2/4 p-4 md:p-24 md:pl-16 h-full flex flex-col justify-center items-center">
           {processing ? (
             <>
               <p className="animate-spin">
@@ -95,7 +95,7 @@ function App() {
             qrCodePath && (
               <div className="w-full h-full flex flex-col">
                 <h1 className="text-lg mb-3 text-white">You've got your link and QR code! &#x1F389;</h1>
-                <div id="short_url" className="flex justify-between items-center text-white p-2 rounded-lg border-2 border-white w-[400px] mb-4">
+                <div id="short_url" className="flex justify-between items-center text-white p-2 rounded-lg border-2 border-white w-full md:w-[400px] mb-4">
                   <p>ant.com/{shortUrl}</p>
                   <div>
                     <i className="fa-solid fa-copy mr-2" onClick={copyShortUrl}></i>
@@ -103,7 +103,9 @@ function App() {
                   </div>
                 </div>
                 <div className=''>
-                  <img src={qrCodePath} alt="QR Code" className="w-[250px] h-[auto] rounded-lg" />
+                  <a href={url}>
+                    <img src={qrCodePath} alt="QR Code" className="w-[250px] h-[auto] rounded-lg" />
+                  </a>
                   <div>
                     <a href={qrCodePath}
                       download={qrCodePath} >

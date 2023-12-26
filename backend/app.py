@@ -2,12 +2,15 @@ from flask import *
 from cs50 import SQL
 from aux import *
 import qrcode
+from flask_cors import CORS
 import os
 
 # Config 
 dbinit()
 app = Flask(__name__)
-db = SQL("sqlite:///file.db")
+db = SQL("sqlite:///database.db")
+
+CORS(app)  # Enable CORS for all routes
 
 QR_CODE_DIR = './static'
 if not os.path.exists(QR_CODE_DIR):
@@ -19,21 +22,20 @@ def index():
 
 ## API
 
-@app.route("/api/v1/generate_link" methods=["POST"])
+@app.route("/api/v1/generate_link", methods=["POST"])
 def generate_link():
-    try:
-        start_url = request.json.start_url
+        start_url = request.json['start_url']
         new_id = generate_random_code()
 
         db.execute('INSERT INTO entries (id, start_url) VALUES (:id, :start_url)', id=new_id, start_url=start_url)
+
+        print(f'NEW ID ' + new_id)
+
         return jsonify({'status': 'success', 'id': new_id })
 
-    except Exception as e:
-        return jsonify({'status': 'fail'})
-
-@app.route('api/v1/generate_qr', methods=['POST'])
+@app.route('/api/v1/generate_qr', methods=['POST'])
 def generate_qr_code():
-    url = request.json.start_url
+    url = request.json['start_url']
     
     # Generate the QR code
     qr = qrcode.QRCode(

@@ -7,33 +7,47 @@ function App() {
   const [url, setUrl] = useState('');
   const [processing, setProcessing] = useState(false);
   const [qrCodePath, setQrCodePath] = useState('');
+  const [shortUrl, setShortUrl] = useState('')
 
   const performMagic = async () => {
     try {
       setProcessing(true);
 
       // Make a request to generate QR code
-      const qrResponse = await axios.post('/api/v1/generate_qr', {
+      const qrResponse = await axios.post('https://5000-kunhnao-ant-b5tt6xs3lep.ws-eu107.gitpod.io/api/v1/generate_qr', {
         start_url: url,
+
       });
 
-      // Extract QR code path from the response
       const { qr_code_path } = qrResponse.data;
-      setQrCodePath(qr_code_path);
+      setQrCodePath("https://5000-kunhnao-ant-b5tt6xs3lep.ws-eu107.gitpod.io/" + qr_code_path);
+
+
 
       // Make a request to generate short URL
-      const shortUrlResponse = await axios.post('/api/v1/generate_link', {
+      const shortUrlResponse = await axios.post('https://5000-kunhnao-ant-b5tt6xs3lep.ws-eu107.gitpod.io/api/v1/generate_link', {
         start_url: url,
       });
 
-      // Handle the response as needed
-      console.log(shortUrlResponse.data);
+      setShortUrl(shortUrlResponse.data["id"]);
+
+
     } catch (error) {
       console.error('Failed to perform magic:', error);
     } finally {
       setProcessing(false);
     }
   };
+
+  const copyShortUrl = async () => {
+    try {
+      await navigator.clipboard.writeText(`https://ant.com/${shortUrl}`);
+      alert('Short URL copied to clipboard!');
+    } catch (error) {
+      console.error('Failed to copy short URL:', error);
+    }
+  };
+
 
   return (
     <>
@@ -67,7 +81,7 @@ function App() {
             </button>
           </div>
         </div>
-        <div className="w-2/4 p-24 pl-8 h-full flex flex-col justify-center items-center">
+        <div className="w-2/4 p-24 pl-16 h-full flex flex-col justify-center items-center">
           {processing ? (
             <>
               <p className="animate-spin">
@@ -78,9 +92,26 @@ function App() {
               </p>
             </>
           ) : (
-            // Display QR code image if available
             qrCodePath && (
-              <img src={qrCodePath} alt="QR Code" className="w-64 h-64" />
+              <div className="w-full h-full flex flex-col">
+                <h1 className="text-lg mb-3 text-white">You've got your link and QR code! &#x1F389;</h1>
+                <div id="short_url" className="flex justify-between items-center text-white p-2 rounded-lg border-2 border-white w-[400px] mb-4">
+                  <p>ant.com/{shortUrl}</p>
+                  <div>
+                    <i className="fa-solid fa-copy mr-2" onClick={copyShortUrl}></i>
+                    <a href="https://ant.com/${shortUrl}" target="_blank"><i className="fa-solid fa-external-link"></i></a>
+                  </div>
+                </div>
+                <div className=''>
+                  <img src={qrCodePath} alt="QR Code" className="w-[250px] h-[auto] rounded-lg" />
+                  <div>
+                    <a href={qrCodePath}
+                      download={qrCodePath} >
+                      <p className="text-white p-1 border-2 rounded-lg w-fit mt-4"><i className="fa-solid fa-download"></i> Download QR Code</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
             )
           )}
         </div>

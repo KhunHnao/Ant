@@ -3,3 +3,4 @@ cs50
 qrcode
 flask_cors
 gunicorn
+psycopg2-binary

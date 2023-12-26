@@ -41,7 +41,7 @@ function App() {
 
   const copyShortUrl = async () => {
     try {
-      await navigator.clipboard.writeText(`https://antlink.vercel.app/${shortUrl}`);
+      await navigator.clipboard.writeText(`https://ant-erqz.onrender.com/${shortUrl}`);
       alert('Short URL copied to clipboard!');
     } catch (error) {
       console.error('Failed to copy short URL:', error);
@@ -96,10 +96,10 @@ function App() {
               <div className="w-full h-full flex flex-col">
                 <h1 className="text-lg mb-3 text-white">You've got your link and QR code! &#x1F389;</h1>
                 <div id="short_url" className="flex justify-between items-center text-white p-2 rounded-lg border-2 border-white w-full md:w-[400px] mb-4">
-                  <p>ant.com/{shortUrl}</p>
+                  <p>https://ant-erqz.onrender.com/{shortUrl}</p>
                   <div>
                     <i className="fa-solid fa-copy mr-2" onClick={copyShortUrl}></i>
-                    <a href="https://antlink.vercel.app/${shortUrl}" target="_blank"><i className="fa-solid fa-external-link"></i></a>
+                    <a href="https://ant-erqz.onrender.com/${shortUrl}" target="_blank"><i className="fa-solid fa-external-link"></i></a>
                   </div>
                 </div>
                 <div className=''>

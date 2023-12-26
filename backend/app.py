@@ -61,7 +61,6 @@ def generate_qr_code():
     response_data = {'qr_code_path': qr_img_path}
     return jsonify(response_data)
 
-## Redirects
 
 @app.route("/<slug>")
 def redirect_url(slug):

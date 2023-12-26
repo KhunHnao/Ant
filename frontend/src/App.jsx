@@ -14,18 +14,18 @@ function App() {
       setProcessing(true);
 
       // Make a request to generate QR code
-      const qrResponse = await axios.post('https://5000-kunhnao-ant-b5tt6xs3lep.ws-eu107.gitpod.io/api/v1/generate_qr', {
+      const qrResponse = await axios.post('https://ant-erqz.onrender.com/api/v1/generate_qr', {
         start_url: url,
 
       });
 
       const { qr_code_path } = qrResponse.data;
-      setQrCodePath("https://5000-kunhnao-ant-b5tt6xs3lep.ws-eu107.gitpod.io/" + qr_code_path);
+      setQrCodePath("https://ant-erqz.onrender.com/" + qr_code_path);
 
 
 
       // Make a request to generate short URL
-      const shortUrlResponse = await axios.post('https://5000-kunhnao-ant-b5tt6xs3lep.ws-eu107.gitpod.io/api/v1/generate_link', {
+      const shortUrlResponse = await axios.post('https://ant-erqz.onrender.com/api/v1/generate_link', {
         start_url: url,
       });
 
@@ -41,7 +41,7 @@ function App() {
 
   const copyShortUrl = async () => {
     try {
-      await navigator.clipboard.writeText(`https://ant.com/${shortUrl}`);
+      await navigator.clipboard.writeText(`https://antlink.vercel.app/${shortUrl}`);
       alert('Short URL copied to clipboard!');
     } catch (error) {
       console.error('Failed to copy short URL:', error);
@@ -99,7 +99,7 @@ function App() {
                   <p>ant.com/{shortUrl}</p>
                   <div>
                     <i className="fa-solid fa-copy mr-2" onClick={copyShortUrl}></i>
-                    <a href="https://ant.com/${shortUrl}" target="_blank"><i className="fa-solid fa-external-link"></i></a>
+                    <a href="https://antlink.vercel.app/${shortUrl}" target="_blank"><i className="fa-solid fa-external-link"></i></a>
                   </div>
                 </div>
                 <div className=''>

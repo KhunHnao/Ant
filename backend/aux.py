@@ -1,14 +1,18 @@
 import secrets
 import string
-import sqlite3
+from cs50 import SQL
 
 def dbinit():
-    connection = sqlite3.connect('database.db')
+    # Connect to the ElephantSQL database
+    db_url = "postgresql://mfwmlcdp:sYg0kej_KDz1wiPDSP0Fhlft-JslSOhg@mel.db.elephantsql.com/mfwmlcdp"
+    db = SQL(db_url)
+
+    # Execute the schema.sql script
     with open('schema.sql') as f:
-        connection.executescript(f.read())
-    cur = connection.cursor()
-    connection.commit()
-    connection.close()
+        sql_script = f.read()
+        db.execute(sql_script)
+
+    print("Database initialized")
 
 def generate_random_code(length=6):
     alphanumeric_chars = string.ascii_letters + string.digits

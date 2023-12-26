@@ -8,7 +8,11 @@ import os
 # Config 
 dbinit()
 app = Flask(__name__)
-db = SQL("postgres://mfwmlcdp:sYg0kej_KDz1wiPDSP0Fhlft-JslSOhg@mel.db.elephantsql.com/mfwmlcdp")
+
+# Update the database URL and initialize the db object
+db_url = "postgresql://mfwmlcdp:sYg0kej_KDz1wiPDSP0Fhlft-JslSOhg@mel.db.elephantsql.com/mfwmlcdp"
+db = SQL(db_url)
+
 
 CORS(app)  # Enable CORS for all routes
 

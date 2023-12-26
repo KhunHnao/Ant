@@ -2,3 +2,4 @@ Flask
 cs50
 qrcode
 flask_cors
+gunicorn
